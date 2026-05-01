@@ -1,5 +1,12 @@
 from fastapi import FastAPI
+import json
 app = FastAPI()
+
+def load_data():
+    with open('patients.json','r') as file:
+        data=json.load(file)
+    return data
+
 
 @app.get("/")
 def hello():
@@ -7,4 +14,9 @@ def hello():
 
 @app.get("/about")
 def about():
-    return{'message':'hey there wassup'}
+    return{'message':'Med details'}
+
+@app.get("/view")
+def view():
+    data=load_data()
+    return data
