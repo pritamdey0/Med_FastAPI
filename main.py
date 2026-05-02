@@ -20,3 +20,12 @@ def about():
 def view():
     data=load_data()
     return data
+
+@app.get("/patients/{patient_id}")
+def view_specific_patient(patient_id):
+    data=load_data()
+    for i in data:
+        if(i==patient_id):
+            return data[i]
+        else:
+            return "no patient"
