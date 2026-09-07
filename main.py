@@ -108,6 +108,7 @@ def quer(city:str , risk:str, pul:int=1):
     }
 
 
+from fastapi import HTTPException
 
 Studentt={
     1001:{"name":"ron", "marks":65, "grade":"D+"},
@@ -116,6 +117,13 @@ Studentt={
     1004:{"name":"pon", "marks":95, "grade":"A+"}
 }
 
-@app.get("/studentt/{std_id}")
 def stud(std_id:int):
-    return Studentt[std_id]
+
+    if std_id not in Studentt:
+        raise HTTPException (
+            status_code=404,
+            detail=f"student id {std_id} is not present"
+        )
+    else:
+        return Studentt[std_id]
+
