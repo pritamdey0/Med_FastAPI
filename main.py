@@ -106,3 +106,16 @@ def quer(city:str , risk:str, pul:int=1):
         "pul":pul
 
     }
+
+
+
+Studentt={
+    1001:{"name":"ron", "marks":65, "grade":"D+"},
+    1002:{"name":"fon", "marks":75, "grade":"C+"},
+    1003:{"name":"son", "marks":85, "grade":"B+"},
+    1004:{"name":"pon", "marks":95, "grade":"A+"}
+}
+
+@app.get("/studentt/{std_id}")
+def stud(std_id:int):
+    return Studentt[std_id]
