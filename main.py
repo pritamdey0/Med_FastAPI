@@ -127,3 +127,25 @@ def stud(std_id:int):
     else:
         return Studentt[std_id]
 
+from pydantic import BaseModel
+
+class data(BaseModel):
+    name:str
+    marks:int
+    grade:str
+    student_id:int
+
+@app.post("/submit")
+def sub(details:data):
+    if details.student_id not in Studentt:
+        raise HTTPException(
+            status_code=404,
+            detail=f"no stdent id {details.student_id} present" 
+        )
+    else:
+        Studentt[details.student_id]["marks"]=details.marks
+        Studentt[details.student_id]["grade"]=details.grade
+        return {
+        "message": "Student record updated successfully",
+        "updated_student": Studentt[details.student_id]
+    }
